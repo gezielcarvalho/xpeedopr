@@ -1,4 +1,3 @@
-
 using backend.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -51,18 +50,12 @@ namespace backend
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
-                
             }
 
             app.MapIdentityApi<IdentityUser>();
-
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
-
             app.Run();
         }
     }
