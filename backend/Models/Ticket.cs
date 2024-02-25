@@ -13,10 +13,10 @@ public class Ticket
     // Other properties...
 
     // Foreign key relationship to Customer (AspNetUsers table/entity)
-    public string CustomerId { get; set; }
-    public IdentityUser Customer { get; set; }
+    public string CustomerId { get; set; } = default!;
+    public IdentityUser Customer { get; set; } = default!;
     
     // Foreign key relationship to Employee (AspNetUsers table/entity)
-    public string TechnicianId { get; set; }
-    public IdentityUser Technician { get; set; }
+    public string? TechnicianId { get; set; } = default!;
+    public IdentityUser? Technician { get; set; } = default!;
 }
