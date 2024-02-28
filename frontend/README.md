@@ -1,12 +1,27 @@
-# XpeedOPR: IT Helpdesk Ticket Management System - Frontend
+# Frontend
 
-XpeedOPR is a comprehensive software solution designed to manage helpdesk tickets for IT services in small to medium-sized companies. The system facilitates the tracking and resolution of hardware and software issues reported by customers, allowing for efficient communication between customers, technicians, and managers. Customers can open tickets, track their status, and rate the service upon resolution. Technicians can view and address incoming tickets, while managers can monitor overall statistics and ticket status. Developed using .NET for the backend, Angular for the frontend, and SQL Server for database management, XpeedOPR is deployed in a Docker container for easy scalability and management.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.1.
 
-## Key Features
+## Development server
 
-- **Ticket Management:** Customers can easily open tickets for hardware and software issues, providing detailed descriptions and tracking their progress until resolution.
-- **Technician Dashboard:** Technicians have access to a dedicated dashboard where they can view and prioritize incoming tickets, assign them to specific technicians, and update ticket status as they work on resolutions.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-- **Manager Analytics:** Managers can monitor overall statistics and performance metrics, including ticket resolution times, customer satisfaction ratings, and technician workload, enabling informed decision-making and resource allocation.
+## Code scaffolding
 
-- **Customer Feedback:** Upon resolution of a ticket, customers have the opportunity to rate the service provided, providing valuable feedback for continuous improvement.
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
