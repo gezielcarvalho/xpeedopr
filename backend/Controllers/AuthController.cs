@@ -18,4 +18,14 @@ public class AuthController : ControllerBase
         return Ok(user);
     }
     
+    [HttpPost("login")]
+    public ActionResult<User> Login(UserDto request)
+    {
+        if (user.Username == request.Username && BCrypt.Net.BCrypt.Verify(request.Password, user.HashPassword))
+        {
+            return Ok(user);
+        }
+        return Unauthorized();
+    }
+    
 }
