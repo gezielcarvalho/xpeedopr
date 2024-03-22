@@ -6,37 +6,30 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
 namespace backend.Controllers;
+
 [Route("api/[controller]")]
 [ApiController]
-public class AuthController : ControllerBase
+public class AuthController(IConfiguration configuration) : ControllerBase
 {
-    private static User user = new();
-    private readonly IConfiguration _configuration;
-    
-    public AuthController(IConfiguration configuration)
-    {
-        _configuration = configuration;
-    }
-    
+    private static User _user = new();
+
     [HttpPost("register")]
     public ActionResult<User> Register(UserDto request)
     {
         var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
         
-        user.Username = request.Username;
-        user.HashPassword = passwordHash;
-        return Ok(user);
+        _user.Username = request.Username;
+        _user.HashPassword = passwordHash;
+        return Ok(_user);
     }
     
     [HttpPost("login")]
     public ActionResult<User> Login(UserDto request)
     {
-        if (user.Username == request.Username && BCrypt.Net.BCrypt.Verify(request.Password, user.HashPassword))
-        {
-            var token = GenerateJwtToken(user);
-            return Ok(new { token });
-        }
-        return Unauthorized();
+        if (_user.Username != request.Username || !BCrypt.Net.BCrypt.Verify(request.Password, _user.HashPassword))
+            return Unauthorized();
+        var token = GenerateJwtToken(_user);
+        return Ok(new { token });
     }
     
     private string GenerateJwtToken(User user)
@@ -46,8 +39,8 @@ public class AuthController : ControllerBase
             new Claim(ClaimTypes.Name, user.Username)
         };
 
-        var value = _configuration.GetSection("AppSettings:Secret").Value;
-        var lifeTime = _configuration.GetSection("AppSettings:TokenLifeTime").Value;
+        var value = configuration.GetSection("AppSettings:Secret").Value;
+        var lifeTime = configuration.GetSection("AppSettings:TokenLifeTime").Value;
         if (value != null)
         {
             var key = new SymmetricSecurityKey(
