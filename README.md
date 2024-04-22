@@ -20,7 +20,7 @@ XpeedOPR is a comprehensive software solution designed to manage helpdesk ticket
 
 ## Installation and Setup
 
-1. Clone the repository: `git clone https://github.com/your-username/xpeedopr.git`
+1. Clone the repository: `git clone https://github.com/gezielcarvalho/xpeedopr.git`
 2. Set up the backend:
    - Navigate to the `/backend` directory.
    - Install dependencies: `dotnet restore`
