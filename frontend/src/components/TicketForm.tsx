@@ -45,16 +45,26 @@ export default function TicketForm() {
           />
         </div>
         <div>
-          <label htmlFor="priority">Priority</label>
-          <select
-            id="priority"
-            value={priority}
-            onChange={(e) => setPriority(Number(e.target.value))}
-          >
-            <option value={PriorityStatus.Low}>Low</option>
-            <option value={PriorityStatus.Medium}>Medium</option>
-            <option value={PriorityStatus.High}>High</option>
-          </select>
+          <fieldset className="priority-fieldset">
+            <legend>Priority</legend>
+
+            {Object.entries(PriorityStatus).map(([key, value]) => {
+              if (isNaN(Number(key))) {
+                return (
+                  <label key={key} className="priority-label">
+                    <input
+                      type="radio"
+                      className="priority-input"
+                      value={value}
+                      checked={priority === value}
+                      onChange={() => setPriority(value as PriorityStatus)}
+                    />
+                    {key}
+                  </label>
+                );
+              }
+            })}
+          </fieldset>
         </div>
         <button className="px-4 py-2 bg-blue-500 text-white rounded">
           Submit
