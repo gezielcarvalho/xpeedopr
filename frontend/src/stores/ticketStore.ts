@@ -1,16 +1,10 @@
 import { create } from "zustand";
+import { Ticket } from "../types";
 
 interface State {
   tickets: Ticket[];
   addTicket: (ticket: Ticket) => void;
   removeTicket: (ticket: Ticket) => void;
-}
-
-interface Ticket {
-  id: string;
-  title: string;
-  description: string;
-  priority: string;
 }
 
 const useTicketStore = create<State>((set) => ({

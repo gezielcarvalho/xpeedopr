@@ -1,15 +1,13 @@
-import React, { FormEvent, useState } from "react";
-
-enum PriorityStatus {
-  Low = 1,
-  Medium = 2,
-  High = 3,
-}
+import { FormEvent, useState } from "react";
+import { ticketStore } from "../stores";
+import { PriorityStatus } from "../enums";
 
 export default function TicketForm() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState(PriorityStatus.Low);
+
+  const { tickets, addTicket } = ticketStore();
 
   const clearForm = () => {
     setTitle("");
@@ -20,6 +18,12 @@ export default function TicketForm() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log({ title, description, priority });
+    addTicket({
+      id: new Date().toISOString(),
+      title,
+      description,
+      priority: priority as PriorityStatus,
+    });
     clearForm();
   };
 
@@ -32,7 +36,7 @@ export default function TicketForm() {
 
   return (
     <div className="flex flex-col items-center justify-center bg-gray-100">
-      <h1 className="text-2xl font-bold mb-4">Ticket Form</h1>
+      <h1 className="text-2xl font-bold mb-4">Ticket Form: {tickets.length}</h1>
       <form onSubmit={handleSubmit} className="ticket-form">
         <div>
           <label htmlFor="title">Title</label>
