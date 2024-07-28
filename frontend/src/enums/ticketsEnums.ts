@@ -1,5 +1,5 @@
 export enum PriorityStatus {
-  Low = 1,
-  Medium = 2,
-  High = 3,
+  LOW = 1,
+  MEDIUM = 2,
+  HIGH = 3,
 }

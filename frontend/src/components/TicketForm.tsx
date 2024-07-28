@@ -5,14 +5,14 @@ import { PriorityStatus } from "../enums";
 export default function TicketForm() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [priority, setPriority] = useState(PriorityStatus.Low);
+  const [priority, setPriority] = useState(PriorityStatus.LOW);
 
   const { tickets, addTicket } = useTicketStore();
 
   const clearForm = () => {
     setTitle("");
     setDescription("");
-    setPriority(PriorityStatus.Low);
+    setPriority(PriorityStatus.LOW);
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
