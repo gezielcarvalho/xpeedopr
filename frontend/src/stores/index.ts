@@ -1,5 +1,5 @@
 // Export all stores from here
 import counterStore from "./counterStore";
-import ticketStore from "./ticketStore";
+import useTicketStore from "./ticketStore";
 
-export { counterStore, ticketStore };
+export { counterStore, useTicketStore };

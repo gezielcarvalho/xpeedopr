@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { ticketStore } from "../stores";
+import { useTicketStore } from "../stores";
 import { PriorityStatus } from "../enums";
 
 export default function TicketForm() {
@@ -7,7 +7,7 @@ export default function TicketForm() {
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState(PriorityStatus.Low);
 
-  const { tickets, addTicket } = ticketStore();
+  const { tickets, addTicket } = useTicketStore();
 
   const clearForm = () => {
     setTitle("");
