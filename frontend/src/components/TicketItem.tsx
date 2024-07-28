@@ -12,7 +12,7 @@ const priorityStyle = {
 };
 
 export default function TicketItem({ ticket }: { ticket: Ticket }) {
-  const { removeTicket, setEditingTicket } = useTicketStore();
+  const { removeTicket, setEditingTicket, editingTicket } = useTicketStore();
   return (
     <div className="ticket-item">
       <div className={`priority-dot ${priorityStyle[ticket.priority]}`}>
@@ -22,14 +22,24 @@ export default function TicketItem({ ticket }: { ticket: Ticket }) {
       <p>{ticket.description}</p>
       <button
         type="button"
-        onClick={() => setEditingTicket(ticket)}
+        onClick={() =>
+          editingTicket?.id !== ticket.id
+            ? setEditingTicket(ticket)
+            : setEditingTicket(null)
+        }
         className="px-4 py-2 bg-yellow-500 text-white rounded"
       >
-        Edit Ticket
+        {editingTicket?.id !== ticket.id ? "Edit Ticket" : "Cancel Edit"}
       </button>
-      <button className="button" onClick={() => removeTicket(ticket)}>
-        Delete
-      </button>
+      {editingTicket?.id !== ticket.id && (
+        <button
+          disabled={editingTicket?.id == ticket.id}
+          className="button"
+          onClick={() => removeTicket(ticket)}
+        >
+          Delete
+        </button>
+      )}
     </div>
   );
 }
