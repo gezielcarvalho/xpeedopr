@@ -1,37 +1,49 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useTicketStore } from "../stores";
 import { PriorityStatus } from "../enums";
+import { Ticket } from "../types";
 
-export default function TicketForm() {
+export default function TicketForm({
+  editingTicket,
+}: {
+  editingTicket: Ticket | null;
+}) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState(PriorityStatus.LOW);
 
-  const { tickets, addTicket } = useTicketStore();
+  const { tickets, addTicket, updateTicket, setEditingTicket } =
+    useTicketStore();
 
   const clearForm = () => {
     setTitle("");
     setDescription("");
     setPriority(PriorityStatus.LOW);
+    setEditingTicket(null);
   };
+
+  useEffect(() => {
+    if (editingTicket) {
+      setTitle(editingTicket.title);
+      setDescription(editingTicket.description);
+      setPriority(editingTicket.priority);
+    } else {
+      clearForm();
+    }
+  }, [editingTicket]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log({ title, description, priority });
-    addTicket({
-      id: new Date().toISOString(),
-      title,
-      description,
-      priority: priority as PriorityStatus,
-    });
+    console.log({ editingTicket });
+    editingTicket
+      ? updateTicket({ ...editingTicket, title, description, priority })
+      : addTicket({
+          id: new Date().toISOString(),
+          title,
+          description,
+          priority,
+        });
     clearForm();
-  };
-
-  const ticketData = {
-    id: new Date().toISOString(),
-    title,
-    description,
-    priority,
   };
 
   return (
@@ -77,6 +89,13 @@ export default function TicketForm() {
             })}
           </fieldset>
         </div>
+        <button
+          type="button"
+          onClick={clearForm}
+          className="px-4 py-2 bg-red-500 text-white rounded"
+        >
+          Clear
+        </button>
         <button className="px-4 py-2 bg-blue-500 text-white rounded">
           Submit
         </button>

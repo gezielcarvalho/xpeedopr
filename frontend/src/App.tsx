@@ -6,10 +6,10 @@ import { useTicketStore } from "./stores";
 import TicketsList from "./components/TicketsList";
 
 const App: React.FC = () => {
-  const { tickets } = useTicketStore();
+  const { tickets, editingTicket } = useTicketStore();
   return (
     <>
-      <TicketForm />
+      <TicketForm editingTicket={editingTicket} />
       <ZustandExample />
       {tickets.length > 0 && <h1>Tickets List</h1> && (
         <TicketsList tickets={tickets} />

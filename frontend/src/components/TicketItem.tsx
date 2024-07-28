@@ -12,7 +12,7 @@ const priorityStyle = {
 };
 
 export default function TicketItem({ ticket }: { ticket: Ticket }) {
-  const { removeTicket } = useTicketStore();
+  const { removeTicket, setEditingTicket } = useTicketStore();
   return (
     <div className="ticket-item">
       <div className={`priority-dot ${priorityStyle[ticket.priority]}`}>
@@ -20,6 +20,13 @@ export default function TicketItem({ ticket }: { ticket: Ticket }) {
       </div>
       <h2>{ticket.title}</h2>
       <p>{ticket.description}</p>
+      <button
+        type="button"
+        onClick={() => setEditingTicket(ticket)}
+        className="px-4 py-2 bg-yellow-500 text-white rounded"
+      >
+        Edit Ticket
+      </button>
       <button className="button" onClick={() => removeTicket(ticket)}>
         Delete
       </button>
