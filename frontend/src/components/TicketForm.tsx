@@ -23,6 +23,13 @@ export default function TicketForm() {
     clearForm();
   };
 
+  const ticketData = {
+    id: new Date().toISOString(),
+    title,
+    description,
+    priority,
+  };
+
   return (
     <div className="flex flex-col items-center justify-center bg-gray-100">
       <h1 className="text-2xl font-bold mb-4">Ticket Form</h1>

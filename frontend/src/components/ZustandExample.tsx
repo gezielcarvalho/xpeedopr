@@ -1,9 +1,9 @@
 import React from "react";
 
-import useStore from "../store/store";
+import useCounter from "../stores/counterStore";
 
-const ZustandExample: React.FC = () => {
-  const { count, increase, decrease } = useStore();
+export default function ZustandExample() {
+  const { count, increase, decrease } = useCounter();
 
   return (
     <div className="flex flex-col items-center justify-center bg-gray-100">
@@ -24,6 +24,4 @@ const ZustandExample: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default ZustandExample;
+}

@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 
 interface State {
   count: number;
@@ -6,10 +6,10 @@ interface State {
   decrease: () => void;
 }
 
-const useStore = create<State>((set) => ({
+const useCounter = create<State>((set) => ({
   count: 0,
   increase: () => set((state) => ({ count: state.count + 1 })),
   decrease: () => set((state) => ({ count: state.count - 1 })),
 }));
 
-export default useStore;
+export default useCounter;
