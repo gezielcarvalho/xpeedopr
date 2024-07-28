@@ -14,13 +14,27 @@ const useTicketStore = create<State>((set) => ({
   tickets: [] as Ticket[],
   editingTicket: null as Ticket | null,
   addTicket: (ticket: Ticket) =>
-    set((state) => ({ tickets: [...state.tickets, ticket] })),
+    set((state) => {
+      const finalStateTickets = [...state.tickets, ticket];
+      finalStateTickets.sort((a, b) => b.priority - a.priority);
+      return { tickets: finalStateTickets };
+    }),
   removeTicket: (ticket: Ticket) =>
-    set((state) => ({ tickets: state.tickets.filter((t) => t !== ticket) })),
+    set((state) => {
+      const finalStateTickets = state.tickets.filter((t) => t !== ticket);
+      finalStateTickets.sort((a, b) => b.priority - a.priority);
+      return { tickets: finalStateTickets };
+    }),
   updateTicket: (ticket: Ticket) =>
-    set((state) => ({
-      tickets: state.tickets.map((t) => (t.id === ticket.id ? ticket : t)),
-    })),
+    set((state) => {
+      const finalStateTickets = state.tickets.map((t) =>
+        t.id === ticket.id ? ticket : t
+      );
+      finalStateTickets.sort((a, b) => b.priority - a.priority);
+      return {
+        tickets: finalStateTickets,
+      };
+    }),
   setEditingTicket: (ticket: Ticket | null) => set({ editingTicket: ticket }),
 }));
 

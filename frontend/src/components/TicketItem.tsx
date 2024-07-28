@@ -32,11 +32,7 @@ export default function TicketItem({ ticket }: { ticket: Ticket }) {
         {editingTicket?.id !== ticket.id ? "Edit Ticket" : "Cancel Edit"}
       </button>
       {editingTicket?.id !== ticket.id && (
-        <button
-          disabled={editingTicket?.id == ticket.id}
-          className="button"
-          onClick={() => removeTicket(ticket)}
-        >
+        <button className="button" onClick={() => removeTicket(ticket)}>
           Delete
         </button>
       )}
