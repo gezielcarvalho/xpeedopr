@@ -3,6 +3,8 @@ import React from "react";
 import { Ticket } from "../types";
 import { PriorityStatus, PriorityStatusLabels } from "../enums";
 
+import { useTicketStore } from "../stores";
+
 const priorityStyle = {
   [PriorityStatus.LOW]: "text-green-500",
   [PriorityStatus.MEDIUM]: "text-yellow-500",
@@ -10,6 +12,7 @@ const priorityStyle = {
 };
 
 export default function TicketItem({ ticket }: { ticket: Ticket }) {
+  const { removeTicket } = useTicketStore();
   return (
     <div className="ticket-item">
       <div className={`priority-dot ${priorityStyle[ticket.priority]}`}>
@@ -17,6 +20,9 @@ export default function TicketItem({ ticket }: { ticket: Ticket }) {
       </div>
       <h2>{ticket.title}</h2>
       <p>{ticket.description}</p>
+      <button className="button" onClick={() => removeTicket(ticket)}>
+        Delete
+      </button>
     </div>
   );
 }

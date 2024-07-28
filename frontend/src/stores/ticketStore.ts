@@ -5,6 +5,7 @@ interface State {
   tickets: Ticket[];
   addTicket: (ticket: Ticket) => void;
   removeTicket: (ticket: Ticket) => void;
+  updateTicket: (ticket: Ticket) => void;
 }
 
 const useTicketStore = create<State>((set) => ({
