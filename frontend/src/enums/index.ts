@@ -1,3 +1,3 @@
-import { PriorityStatus } from "./ticketsEnums";
+import { PriorityStatus, PriorityStatusLabels } from "./ticketsEnums";
 
-export { PriorityStatus };
+export { PriorityStatus, PriorityStatusLabels };

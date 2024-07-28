@@ -3,21 +3,17 @@ import "./styles.css";
 import ZustandExample from "./components/ZustandExample";
 import TicketForm from "./components/TicketForm";
 import { useTicketStore } from "./stores";
+import TicketsList from "./components/TicketsList";
 
 const App: React.FC = () => {
   const { tickets } = useTicketStore();
   return (
     <>
-      {tickets.length > 0 &&
-        tickets.map((ticket) => (
-          <div key={ticket.id}>
-            <h2>{ticket.title}</h2>
-            <p>{ticket.description}</p>
-            <p>{ticket.priority}</p>
-          </div>
-        ))}
       <TicketForm />
       <ZustandExample />
+      {tickets.length > 0 && <h1>Tickets List</h1> && (
+        <TicketsList tickets={tickets} />
+      )}
     </>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Ticket } from "../types";
-import { PriorityStatus } from "../enums";
+import { PriorityStatus, PriorityStatusLabels } from "../enums";
 
 const priorityStyle = {
   [PriorityStatus.LOW]: "text-green-500",
@@ -12,10 +12,11 @@ const priorityStyle = {
 export default function TicketItem({ ticket }: { ticket: Ticket }) {
   return (
     <div className="ticket-item">
-      <div className={`priority-dot ${priorityStyle[ticket.priority]}`}></div>
+      <div className={`priority-dot ${priorityStyle[ticket.priority]}`}>
+        {PriorityStatusLabels[ticket.priority as PriorityStatus]}
+      </div>
       <h2>{ticket.title}</h2>
       <p>{ticket.description}</p>
-      <p>{ticket.priority}</p>
     </div>
   );
 }
