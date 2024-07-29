@@ -1,3 +1,5 @@
 import UserContext from "./UserContext";
+import { ThemeContext } from "./ThemeContext";
+import { ThemeProvider } from "./ThemeProvider";
 
-export { UserContext };
+export { UserContext, ThemeContext, ThemeProvider };
