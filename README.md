@@ -1,6 +1,6 @@
 # XpeedOPR: IT Helpdesk Ticket Management System
 
-XpeedOPR is a comprehensive software solution designed to manage helpdesk tickets for IT services in small to medium-sized companies. The system facilitates the tracking and resolution of hardware and software issues reported by customers, allowing for efficient communication between customers, technicians, and managers. Customers can open tickets, track their status, and rate the service upon resolution. Technicians can view and address incoming tickets, while managers can monitor overall statistics and ticket status. Developed using .NET for the backend, Angular for the frontend, and SQL Server for database management, XpeedOPR is deployed in a Docker container for easy scalability and management.
+XpeedOPR is a comprehensive software solution designed to manage helpdesk tickets for IT services in small to medium-sized companies. The system facilitates the tracking and resolution of hardware and software issues reported by customers, allowing for efficient communication between customers, technicians, and managers. Customers can open tickets, track their status, and rate the service upon resolution. Technicians can view and address incoming tickets, while managers can monitor overall statistics and ticket status. Developed using .NET for the backend, Angular for the backoffice, ReactJS for the frontend and SQL Server for database management, XpeedOPR is deployed in a Docker container for easy scalability and management.
 
 ## Key Features
 
@@ -14,7 +14,8 @@ XpeedOPR is a comprehensive software solution designed to manage helpdesk ticket
 ## Technologies Used
 
 - **Backend:** .NET
-- **Frontend:** Angular
+- **Backoffice:** Angular 
+- **Frontend:** ReactJS
 - **Database:** SQL Server
 - **Deployment:** Docker
 
@@ -27,11 +28,15 @@ XpeedOPR is a comprehensive software solution designed to manage helpdesk ticket
    - Set up database connection strings in `appsettings.json`.
    - Run migrations: `dotnet ef database update`
    - Start the backend server: `dotnet run`
-3. Set up the frontend:
-   - Navigate to the `/frontend` directory.
+3. Set up the backoffice:
+   - Navigate to the `/backoffice` directory.
    - Install dependencies: `npm install`
    - Start the development server: `ng serve`
-4. Access the application at `http://localhost:4200` in your web browser.
+4. Set up the frontend:
+   - Navigate to the `/frontend` directory.
+   - Install dependencies: `npm install`
+   - Start the development server: `npm start`
+4. Access the application at `http://localhost:3000` in your web browser.
 
 ## Usage
 
@@ -47,9 +52,5 @@ Contributions to XpeedOPR are welcome! Please fork the repository, make your cha
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-
-## Contact
-
-For questions or feedback, please contact [Your Name](mailto:your-email@example.com).
 
 ---
