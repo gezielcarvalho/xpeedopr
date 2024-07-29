@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { Ticket } from "../types";
+import { getTickets } from "../services";
 
 interface State {
   tickets: Ticket[];
@@ -45,10 +46,7 @@ const useTicketStore = create<State>((set) => ({
     set({ loading: true, error: null });
     try {
       // temporarily returining a dummy response
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/posts"
-      );
-      const data: any[] = await response.json();
+      const data = await getTickets();
       set(() => {
         console.log({ data });
         const tickets: Ticket[] = data.map((post: any) => {
