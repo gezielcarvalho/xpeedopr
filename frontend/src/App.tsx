@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./styles.css";
 import ZustandExample from "./components/ZustandExample";
 import TicketForm from "./components/TicketForm";
@@ -8,7 +8,11 @@ import { ThemeProvider, UserContext } from "./context";
 import { ContextExample } from "./components/ContextExample";
 
 const App: React.FC = () => {
-  const { tickets, editingTicket } = useTicketStore();
+  const { tickets, editingTicket, fetchData } = useTicketStore();
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
   return (
     <>
       <ThemeProvider>

@@ -12,4 +12,4 @@ const useCounter = create<State>((set) => ({
   decrease: () => set((state) => ({ count: state.count - 1 })),
 }));
 
-export default useCounter;
+export { useCounter };
