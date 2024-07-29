@@ -1,7 +1,8 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import { useTicketStore } from "../stores";
 import { PriorityStatus } from "../enums";
 import { Ticket } from "../types";
+import { UserContext } from "../context";
 
 export default function TicketForm({
   editingTicket,
@@ -11,6 +12,8 @@ export default function TicketForm({
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState(PriorityStatus.LOW);
+
+  const { username } = useContext(UserContext);
 
   const { tickets, addTicket, updateTicket, setEditingTicket } =
     useTicketStore();
@@ -48,7 +51,7 @@ export default function TicketForm({
 
   return (
     <div className="flex flex-col items-center justify-center bg-gray-100">
-      <h1 className="text-2xl font-bold mb-4">Ticket Form: {tickets.length}</h1>
+      <h1 className="text-2xl font-bold mb-4">User: {username}</h1>
       <form onSubmit={handleSubmit} className="ticket-form">
         <div>
           <label htmlFor="title">Title</label>
