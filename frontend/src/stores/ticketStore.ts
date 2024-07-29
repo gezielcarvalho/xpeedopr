@@ -10,7 +10,7 @@ interface State {
   setEditingTicket: (ticket: Ticket | null) => void;
   loading: boolean;
   error: string | null;
-  fetchData: () => Promise<void>;
+  getTickets: () => Promise<void>;
 }
 
 const useTicketStore = create<State>((set) => ({
@@ -41,17 +41,25 @@ const useTicketStore = create<State>((set) => ({
   setEditingTicket: (ticket: Ticket | null) => set({ editingTicket: ticket }),
   loading: false,
   error: null,
-  fetchData: async () => {
+  getTickets: async () => {
     set({ loading: true, error: null });
     try {
       // temporarily returining a dummy response
       const response = await fetch(
         "https://jsonplaceholder.typicode.com/posts"
       );
-      const data = await response.json();
+      const data: any[] = await response.json();
       set(() => {
         console.log({ data });
-        return { tickets: [], loading: false };
+        const tickets: Ticket[] = data.map((post: any) => {
+          return {
+            id: post.id,
+            title: post.title,
+            description: post.body,
+            priority: Math.floor(Math.random() * 3) + 1,
+          };
+        });
+        return { tickets, loading: false };
       });
     } catch (error: any) {
       set({ error: error.message, loading: false });

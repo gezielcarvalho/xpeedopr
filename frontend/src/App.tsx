@@ -8,11 +8,12 @@ import { ThemeProvider, UserContext } from "./context";
 import { ContextExample } from "./components/ContextExample";
 
 const App: React.FC = () => {
-  const { tickets, editingTicket, fetchData } = useTicketStore();
+  const { tickets, editingTicket, getTickets } = useTicketStore();
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    getTickets();
+  }, [getTickets]);
+
   return (
     <>
       <ThemeProvider>
