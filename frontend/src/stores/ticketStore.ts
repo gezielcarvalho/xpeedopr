@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { Ticket } from "../types";
-import { getTickets } from "../services";
+import { addTicket, deleteTicket, getTickets } from "../services";
 
 interface State {
   tickets: Ticket[];
@@ -17,18 +17,40 @@ interface State {
 const useTicketStore = create<State>((set) => ({
   tickets: [] as Ticket[],
   editingTicket: null as Ticket | null,
-  addTicket: (ticket: Ticket) =>
-    set((state) => {
-      const finalStateTickets = [...state.tickets, ticket];
-      finalStateTickets.sort((a, b) => b.priority - a.priority);
-      return { tickets: finalStateTickets };
-    }),
-  removeTicket: (ticket: Ticket) =>
-    set((state) => {
-      const finalStateTickets = state.tickets.filter((t) => t !== ticket);
-      finalStateTickets.sort((a, b) => b.priority - a.priority);
-      return { tickets: finalStateTickets };
-    }),
+  addTicket: async (ticket: Ticket) => {
+    set({ loading: true, error: null });
+    try {
+      const data = await addTicket(ticket);
+      console.log({ data });
+      const newTicket: Ticket = {
+        id: data.id,
+        title: ticket.title,
+        description: ticket.description,
+        priority: Math.floor(Math.random() * 3) + 1,
+      };
+      set((state) => {
+        const finalStateTickets = [...state.tickets, newTicket];
+        finalStateTickets.sort((a, b) => b.priority - a.priority);
+        return { tickets: finalStateTickets };
+      });
+    } catch (error: any) {
+      set({ error: error.message, loading: false });
+    }
+  },
+  removeTicket: async (ticket: Ticket) => {
+    set({ loading: true, error: null });
+    try {
+      // temporarily returining a dummy response
+      await deleteTicket(ticket.id);
+      set((state) => {
+        const finalStateTickets = state.tickets.filter((t) => t !== ticket);
+        finalStateTickets.sort((a, b) => b.priority - a.priority);
+        return { tickets: finalStateTickets };
+      });
+    } catch (error: any) {
+      set({ error: error.message, loading: false });
+    }
+  },
   updateTicket: (ticket: Ticket) =>
     set((state) => {
       const finalStateTickets = state.tickets.map((t) =>

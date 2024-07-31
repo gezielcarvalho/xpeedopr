@@ -10,4 +10,16 @@ const getTickets = async () => {
   return response.data;
 };
 
-export { getTickets };
+const deleteTicket = async (id: string) => {
+  // temporarily returining a dummy response
+  const response = await api.delete(`/posts/${id}`);
+  return response.data;
+};
+
+const addTicket = async (ticket: any) => {
+  // temporarily returining a dummy response
+  const response = await api.post("/posts", ticket);
+  return response.data;
+};
+
+export { getTickets, deleteTicket, addTicket };
