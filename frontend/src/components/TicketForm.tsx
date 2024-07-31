@@ -4,11 +4,11 @@ import { PriorityStatus } from "../enums";
 import { Ticket } from "../types";
 import { UserContext } from "../context";
 
-export default function TicketForm({
-  editingTicket,
-}: {
+interface ITicketFormProps {
   editingTicket: Ticket | null;
-}) {
+}
+
+export const TicketForm = ({ editingTicket }: ITicketFormProps) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState(PriorityStatus.LOW);
@@ -105,4 +105,4 @@ export default function TicketForm({
       </form>
     </div>
   );
-}
+};

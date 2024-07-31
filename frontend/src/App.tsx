@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import "./styles.css";
-import ZustandExample from "./components/ZustandExample";
-import TicketForm from "./components/TicketForm";
+import { ZustandExample } from "./components";
+import { TicketForm } from "./components";
 import { useTicketStore } from "./stores";
-import TicketsList from "./components/TicketsList";
+import { TicketsList } from "./components";
 import { ThemeProvider, UserContext } from "./context";
-import { ContextExample } from "./components/ContextExample";
+import { ContextExample } from "./components";
 
 const App: React.FC = () => {
   const { tickets, editingTicket, getTickets } = useTicketStore();

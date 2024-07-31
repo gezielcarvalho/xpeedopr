@@ -11,7 +11,11 @@ const priorityStyle = {
   [PriorityStatus.HIGH]: "text-red-500",
 };
 
-export default function TicketItem({ ticket }: { ticket: Ticket }) {
+interface ITicketItemProps {
+  ticket: Ticket;
+}
+
+export const TicketItem = ({ ticket }: ITicketItemProps) => {
   const { removeTicket, setEditingTicket, editingTicket } = useTicketStore();
   return (
     <div className="ticket-item">
@@ -38,4 +42,4 @@ export default function TicketItem({ ticket }: { ticket: Ticket }) {
       )}
     </div>
   );
-}
+};

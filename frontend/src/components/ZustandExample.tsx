@@ -1,8 +1,6 @@
-import React from "react";
-
 import { useCounter } from "../stores";
 
-export default function ZustandExample() {
+export const ZustandExample = () => {
   const { count, increase, decrease } = useCounter();
 
   return (
@@ -24,4 +22,4 @@ export default function ZustandExample() {
       </div>
     </div>
   );
-}
+};

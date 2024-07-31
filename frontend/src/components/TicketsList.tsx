@@ -1,8 +1,8 @@
 import React from "react";
 import { Ticket } from "../types";
-import TicketItem from "./TicketItem";
+import { TicketItem } from "./";
 
-export default function TicketsList({ tickets }: { tickets: Ticket[] }) {
+export const TicketsList = ({ tickets }: { tickets: Ticket[] }) => {
   return (
     <div className="ticket-list">
       <h1>Tickets List</h1>
@@ -10,4 +10,4 @@ export default function TicketsList({ tickets }: { tickets: Ticket[] }) {
         tickets.map((ticket) => <TicketItem key={ticket.id} ticket={ticket} />)}
     </div>
   );
-}
+};

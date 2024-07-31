@@ -1,3 +1,1 @@
-import type { Ticket } from "./ticketTypes";
-
-export { Ticket };
+export * from "./ticketTypes";
