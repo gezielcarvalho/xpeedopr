@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { Ticket } from "../types";
-import { addTicket, deleteTicket, getTickets } from "../services";
+import { addTicket, deleteTicket, getTickets, updateTicket } from "../services";
 
 interface State {
   tickets: Ticket[];
@@ -51,16 +51,24 @@ const useTicketStore = create<State>((set) => ({
       set({ error: error.message, loading: false });
     }
   },
-  updateTicket: (ticket: Ticket) =>
-    set((state) => {
-      const finalStateTickets = state.tickets.map((t) =>
-        t.id === ticket.id ? ticket : t
-      );
-      finalStateTickets.sort((a, b) => b.priority - a.priority);
-      return {
-        tickets: finalStateTickets,
-      };
-    }),
+  updateTicket: async (ticket: Ticket) => {
+    set({ loading: true, error: null });
+    try {
+      // temporarily returining a dummy response
+      const data = await updateTicket(ticket);
+      set((state) => {
+        const finalStateTickets = state.tickets.map((t) =>
+          t.id === ticket.id ? ticket : t
+        );
+        finalStateTickets.sort((a, b) => b.priority - a.priority);
+        return {
+          tickets: finalStateTickets,
+        };
+      });
+    } catch (error: any) {
+      set({ error: error.message, loading: false });
+    }
+  },
   setEditingTicket: (ticket: Ticket | null) => set({ editingTicket: ticket }),
   loading: false,
   error: null,

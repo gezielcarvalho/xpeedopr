@@ -22,4 +22,10 @@ const addTicket = async (ticket: any) => {
   return response.data;
 };
 
-export { getTickets, deleteTicket, addTicket };
+const updateTicket = async (ticket: any) => {
+  // temporarily returining a dummy response
+  const response = await api.put(`/posts/${ticket.id}`, ticket);
+  return response.data;
+};
+
+export { getTickets, deleteTicket, addTicket, updateTicket };
