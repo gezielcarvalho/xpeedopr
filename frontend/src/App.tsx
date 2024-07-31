@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles.css";
-import { Home } from "./components";
+import { Home, TicketDetails } from "./components";
 import { useTicketStore } from "./stores";
 import { TicketsList } from "./components";
 import { ThemeProvider, UserContext } from "./context";
@@ -21,6 +21,8 @@ const App: React.FC = () => {
                 path="/tickets"
                 element={<TicketsList tickets={tickets} />}
               />
+              <Route path="/tickets/:id" element={<TicketDetails />} />
+              <Route path="*" element={<div>Not Found</div>} />
             </Routes>
           </Router>
           <ContextExample />
