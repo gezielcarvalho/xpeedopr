@@ -1,32 +1,32 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./styles.css";
-import { ZustandExample } from "./components";
-import { TicketForm } from "./components";
+import { Home } from "./components";
 import { useTicketStore } from "./stores";
 import { TicketsList } from "./components";
 import { ThemeProvider, UserContext } from "./context";
 import { ContextExample } from "./components";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const App: React.FC = () => {
-  const { tickets, editingTicket, getTickets } = useTicketStore();
-
-  useEffect(() => {
-    getTickets();
-  }, [getTickets]);
+  const { tickets } = useTicketStore();
 
   return (
     <>
-      <ThemeProvider>
-        <ContextExample />
-        <ContextExample />
-      </ThemeProvider>
       <UserContext.Provider value={{ username: "Admin" }}>
-        <TicketForm editingTicket={editingTicket} />
+        <ThemeProvider>
+          <Router>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="/tickets"
+                element={<TicketsList tickets={tickets} />}
+              />
+            </Routes>
+          </Router>
+          <ContextExample />
+          <ContextExample />
+        </ThemeProvider>
       </UserContext.Provider>
-      <ZustandExample />
-      {tickets.length > 0 && <h1>Tickets List</h1> && (
-        <TicketsList tickets={tickets} />
-      )}
     </>
   );
 };
