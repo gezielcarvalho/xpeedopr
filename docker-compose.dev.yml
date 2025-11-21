@@ -1,0 +1,39 @@
+version: '3.8'
+
+# Development override for docker-compose.yml
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/src
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+    command: dotnet watch run
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - REACT_APP_API_URL=http://localhost:5108
+      - CHOKIDAR_USEPOLLING=true
+    command: npm start
+
+  backoffice:
+    build:
+      context: ./backoffice
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./backoffice:/app
+      - /app/node_modules
+    environment:
+      - API_URL=http://localhost:5108
+    command: npm start
